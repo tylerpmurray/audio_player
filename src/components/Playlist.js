@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Song from "./Song.js";
-import audio from "./audio/doja remix_B4.mp3";
+import audio from "../audio/doja remix_B4.mp3";
 
 const Playlist = () => {
   const songObj = [

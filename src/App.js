@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={play}>{button}</button>
-      <div style={hide}>Hey Bitch</div>
+      <div style={hide}>Hey Tyler</div>
       <Playlist />
     </div>
   );
