@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Playlist from "./components/Playlist";
 import Upload from "./components/Upload";
 import audio from "./audio/doja remix_B4.mp3";
+import axios from "axios";
 
 function App() {
   const [button, setButton] = useState("Play");
@@ -42,36 +43,63 @@ function App() {
     },
   ];
 
-  // const fetchData = fetch("http://localhost:8000/songs")
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     return data;
-  //   });
-
-  const [song, setSong] = useState("");
+  const [song, setSong] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/songs")
-      .then((response) => response.json())
-      .then((data) => setSong(data.songs));
+    const fetchData = async () => {
+      const result = await axios("http://localhost:8000/songs");
+      console.log(result.data);
+      setSong(result.data);
+    };
+    fetchData();
   }, []);
 
   const upload = (event) => {
     let file = event.target.files;
-    let newObj = {
-      id: 4,
-      title: URL.createObjectURL(file[0]),
-      artist: "artist4",
-      genre: "genre4",
-      ref: URL.createObjectURL(file[0]),
-    };
-    setSong((prevSong) => [...prevSong, newObj]);
+    console.log(file);
+    axios
+      .post("http://localhost:8000/songs", {
+        id: Math.floor(Math.random) * 1000,
+        title: file[0].name,
+        artist: "artist4",
+        genre: "genre4",
+        ref: URL.createObjectURL(file[0]),
+      })
+      .then((resp) => {
+        console.log(resp.data);
+        const fetchData = async () => {
+          const result = await axios("http://localhost:8000/songs");
+          console.log(result.data);
+          setSong(result.data);
+        };
+        fetchData();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const deleteSong = (id) => {
+    axios
+      .delete(`http://localhost:8000/songs/${id}/`)
+      .then((resp) => {
+        console.log(resp.data);
+        const fetchData = async () => {
+          const result = await axios("http://localhost:8000/songs");
+          console.log(result.data);
+          setSong(result.data);
+        };
+        fetchData();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <div className="App">
       <Upload song={song} change={upload} />
-      <Playlist song={song} />
+      <Playlist song={song} deleteSong={deleteSong} />
     </div>
   );
 }
