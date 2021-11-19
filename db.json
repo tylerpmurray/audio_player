@@ -1,0 +1,25 @@
+  {
+    "songs": [
+        {
+            "id": 1,
+            "title": "song1",
+            "artist": "doja",
+            "genre": "genre1",
+            "ref": "http://localhost:8000"
+          },
+          {
+            "id": 2,
+            "title": "song2",
+            "artist": "artist2",
+            "genre": "genre2",
+            "ref": "http://localhost:8000"
+          },
+          {
+            "id": 3,
+            "title": "song3",
+            "artist": "artist3",
+            "genre": "genre3",
+            "ref": "http://localhost:8000"
+          }
+    ]
+  }

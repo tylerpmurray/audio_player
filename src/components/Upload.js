@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 
 //FINISH THIS FUNCTION To Upload the song data to the state
-const Upload = (props) => {
-  const upload = (event) => {
-    props.setSong({ new: "song" });
-    console.log(props.song);
-  };
-
+const Upload = ({ change }) => {
   return (
     <form>
       <input
@@ -14,7 +9,7 @@ const Upload = (props) => {
         id="myFile"
         name="filename"
         accept="audio/*"
-        onChange={upload}
+        onChange={change}
       />
     </form>
   );

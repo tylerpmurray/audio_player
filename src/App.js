@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Playlist from "./components/Playlist";
 import Upload from "./components/Upload";
 import audio from "./audio/doja remix_B4.mp3";
@@ -42,12 +42,36 @@ function App() {
     },
   ];
 
-  const [song, setSong] = useState(songObj);
+  // const fetchData = fetch("http://localhost:8000/songs")
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     return data;
+  //   });
+
+  const [song, setSong] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:8000/songs")
+      .then((response) => response.json())
+      .then((data) => setSong(data.songs));
+  }, []);
+
+  const upload = (event) => {
+    let file = event.target.files;
+    let newObj = {
+      id: 4,
+      title: URL.createObjectURL(file[0]),
+      artist: "artist4",
+      genre: "genre4",
+      ref: URL.createObjectURL(file[0]),
+    };
+    setSong((prevSong) => [...prevSong, newObj]);
+  };
 
   return (
     <div className="App">
-      <Upload song={song} setSong={setSong} />
-      <Playlist song={songObj} />
+      <Upload song={song} change={upload} />
+      <Playlist song={song} />
     </div>
   );
 }
