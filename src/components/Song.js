@@ -1,10 +1,10 @@
 import React from "react";
 
-const Song = (props) => {
+const Song = ({ song }) => {
   return (
     <div>
-      <p>{props.song[0].title}</p>
-      <audio src={props.song[0].ref} controls />
+      <p>{song.title}</p>
+      <audio src={song.ref} controls />
     </div>
   );
 };
