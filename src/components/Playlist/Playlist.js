@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Song from "./Song.js";
+import Song from "../Song/Song.js";
 
 const Playlist = ({ song, deleteSong }) => {
   return (

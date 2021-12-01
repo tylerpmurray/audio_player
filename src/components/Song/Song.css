@@ -1,0 +1,33 @@
+.flex-container {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  align-items: center;
+  text-align: center;
+  position:static;
+}
+
+.flex-item.title {
+  background-color: black;
+  padding: 5px;
+  margin: 1px;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  left: 100px;
+
+}
+
+.flex-item.artist {
+  color: darkgrey;
+}
+
+div {
+  color: rgb(202, 202, 202);
+  background-color: rgb(61, 61, 61);
+}
+
+.flex-item.close {
+  margin: 5px;
+}
+
